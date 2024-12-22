@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <label for="verification-type" class="form-label">Verification Type</label>
+            <select class="form-control custom-input" id="verification-type">
+                <option value="" disabled selected>Select Type</option>
+                <option value="nic">NIC</option>
+                <option value="passport">Passport</option>
+                <option value="driving-license">Driving License</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="address-line-2" class="form-label">Verification Document Number</label>
+            <input type="text" class="form-control custom-input" id="address-line-2" placeholder="Enter document number">
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="document-front" class="form-label">Upload Front Side of Document</label>
+            <input type="file" class="form-control custom-input" id="document-front" accept="image/*">
+        </div>
+        <div class="col-md-6">
+            <label for="document-back" class="form-label">Upload Back Side of Document</label>
+            <input type="file" class="form-control custom-input" id="document-back" accept="image/*">
+        </div>
+    </div>
+</div>

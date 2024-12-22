@@ -57,7 +57,9 @@ ROOT_URLCONF = 'mooverly.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',  # Directory where Django looks for templates
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

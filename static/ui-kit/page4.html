@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>FoodMart - Free eCommerce Grocery Store HTML Website Template</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,12 +30,26 @@
         <hr>
     </div>
 
-    <div class="container video-verification-container">
-        <button id="start-verification-btn" class="btn btn-primary px-5 py-2 mb-4" onclick="startVideoVerification()">Start Video Verification</button>
-        <div class="camera-view" id="camera-view">
-            <video autoplay playsinline id="video"></video>
+    <div class="container mt-4">
+        <h1 class="text-center">Real-Time Video Verification</h1>
+        <div class="video-verification-container">
+            <button id="start-verification-btn" class="btn btn-primary">Start Video Verification</button>
+            <div class="camera-view" id="camera-view">
+                <video id="video" autoplay playsinline></video>
+            </div>
+            <div class="countdown" id="countdown"></div>
         </div>
-        <div class="countdown" id="countdown"></div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row text-center">
+            <div class="col mt-4 mb-3">
+            <form id="video-upload-form" action="page1.html" method="POST" enctype="multipart/form-data" style="display: none;">
+                <input type="file" id="video-input" name="video" accept="video/webm" hidden>
+                <button type="submit" id="submit-form-btn" class="btn btn-primary">Submit Form</button>
+            </form>
+            </div>
+        </div>
     </div>
 
     <footer>

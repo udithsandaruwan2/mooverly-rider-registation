@@ -20,6 +20,18 @@
 </head>
 <body>
     
+    {% if messages %}
+
+        <ul>
+            {% for message in messages %}
+            <li>
+                {{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
     {% include 'loader.html' %}
 
     {% include 'header.html' %}

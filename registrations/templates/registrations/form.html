@@ -10,36 +10,42 @@
 
     {% endif %}
 
-    {% if page == 'register_step1' %}
+    <form action="" method="POST" enctype="multipart/form-data">
 
-        {% include 'registrations/views/step_1_view.html' %}
+        {% csrf_token %}
 
-    {% elif page == 'register_step2' %}
+        {% if page == 'register_step1' %}
 
-        {% include 'registrations/views/step_2_view.html' %}
+            {% include 'registrations/views/step_1_view.html' %}
 
-    {% elif page == 'register_step2' %}
+        {% elif page == 'register_step2' %}
 
-        {% include 'registrations/views/step_3_view.html' %}
-    
-    {% elif page == 'register_step3' %}
+            {% include 'registrations/views/step_2_view.html' %}
 
-        {% include 'registrations/views/step_3_view.html' %}
-    
-    {% elif page == 'register_step4' %}
+        {% elif page == 'register_step2' %}
 
-        {% include 'registrations/views/step_4_view.html' %}
+            {% include 'registrations/views/step_3_view.html' %}
+        
+        {% elif page == 'register_step3' %}
 
-    {% elif page == 'register_step5' %}
-    
-        {% include 'registrations/views/step_5_view.html' %}
+            {% include 'registrations/views/step_3_view.html' %}
+        
+        {% elif page == 'register_step4' %}
 
-    {% endif %}
+            {% include 'registrations/views/step_4_view.html' %}
 
-    {% if page == 'register_step1' or page == 'register_step2' or page == 'register_step3' or page == 'register_step4' %}
+        {% elif page == 'register_step5' %}
+        
+            {% include 'registrations/views/step_5_view.html' %}
 
-        {% include 'registrations/components/footer_buttons.html' %}
+        {% endif %}
 
-    {% endif %}
+        {% if page == 'register_step1' or page == 'register_step2' or page == 'register_step3' or page == 'register_step4' %}
+
+            {% include 'registrations/components/footer_buttons.html' %}
+
+        {% endif %}
+
+    </form>
 
 {% endblock content %}

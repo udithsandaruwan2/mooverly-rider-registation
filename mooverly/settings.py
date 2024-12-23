@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     
     #Installed Apps
     'registrations.apps.RegistrationsConfig',
+    
+    #Third Party Apps
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

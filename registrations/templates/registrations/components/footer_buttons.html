@@ -22,26 +22,7 @@
 
         </div>
         <div class="col-6 text-end">
-
-            {% if page == 'register_step1' %}
-
-                <a  href="{% url 'registerStep2' %}" class="btn btn-primary px-5 py-2">Next</a>
-
-
-            {% elif page == 'register_step2' %}
-
-                <a  href="{% url 'registerStep3' %}" class="btn btn-primary px-5 py-2">Next</a>
-
-            {% elif page == 'register_step3' %}
-
-                <a  href="{% url 'registerStep4' %}" class="btn btn-primary px-5 py-2">Next</a>
-
-            {% elif page == 'register_step4' %}
-
-                <a  href="{% url 'registerStep5' %}" class="btn btn-primary px-5 py-2">Next</a>
-
-            {% endif %}
-
+            <button type="submit" class="btn btn-primary px-5 py-2">Next</button>
         </div>
     </div>
 </div>

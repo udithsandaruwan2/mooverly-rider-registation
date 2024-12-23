@@ -2,15 +2,15 @@
     <div class="row">
         <div class="col-md-4">
             <label for="first-name" class="form-label">First Name</label>
-            <input type="text" class="form-control custom-input" id="first-name" placeholder="Udith">
+            {{form.first_name}}
         </div>
         <div class="col-md-4">
             <label for="middle-name" class="form-label">Middle Name</label>
-            <input type="text" class="form-control custom-input" id="middle-name" placeholder="Sandaruwan">
+            {{form.middle_name}}
         </div>
         <div class="col-md-4">
             <label for="last-name" class="form-label">Last Name</label>
-            <input type="text" class="form-control custom-input" id="last-name" placeholder="Konara">
+            {{form.last_name}}
         </div>
     </div>
 </div>
@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-md-12">
             <label for="full-name" class="form-label">Full Name</label>
-            <input type="text" class="form-control custom-input" id="full-name" placeholder="Udith Sandaruwan Konara">
+            {{form.full_name}}
         </div>
     </div>
 </div>
@@ -29,20 +29,15 @@
     <div class="row">
         <div class="col-md-4">
             <label for="birth-day" class="form-label">Birth Day</label>
-            <input type="date" class="form-control custom-input" id="birth-day">
+            {{form.birth_day}}
         </div>
         <div class="col-md-4">
             <label for="nic" class="form-label">NIC</label>
-            <input type="text" class="form-control custom-input" id="nic" placeholder="XXXXXXXXXV">
+            {{form.nic}}
         </div>
         <div class="col-md-4">
             <label for="gender" class="form-label">Gender</label>
-            <select class="form-control custom-input" id="gender">
-                <option value="" disabled selected>Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
+            {{form.gender}}
         </div>
     </div>
 </div>
@@ -51,15 +46,15 @@
     <div class="row">
         <div class="col-md-4">
             <label for="mobile-number-1" class="form-label">Mobile Number 1</label>
-            <input type="text" class="form-control custom-input" id="mobile-number-1" placeholder="07X XXX XX XX">
+            {{form.mobile_number_1}}
         </div>
         <div class="col-md-4">
             <label for="mobile-number-2" class="form-label">Mobile Number 2</label>
-            <input type="text" class="form-control custom-input" id="mobile-number-2" placeholder="07X XXX XX XX">
+            {{form.mobile_number_2}}
         </div>
         <div class="col-md-4">
             <label for="whatsapp-number" class="form-label">Whatsapp Number</label>
-            <input type="text" class="form-control custom-input" id="whatsapp-number" placeholder="07X XXX XX XX">
+            {{form.whatsapp_number}}
         </div>
     </div>
 </div>

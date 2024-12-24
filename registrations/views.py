@@ -110,7 +110,7 @@ def registerStep3(request):
         application.back_side_document = form.cleaned_data.get('back_side_document')
         application.save()
         
-        return redirect('registerStep4')  # Proceed to the next step
+        return redirect('registerSuccess')  # Proceed to the next step
     
     context = {
         'page': page,
@@ -125,18 +125,7 @@ def registerStep4(request):
     page_title = 'Register'
     
     if request.method == 'POST':
-        return redirect('registerStep5')
-    
-    context = {
-        'page': page,
-        'page_title': page_title
-    }
-    
-    return render(request, 'registrations/form.html', context)
-
-def registerStep5(request):
-    page  = 'register_step5'
-    page_title = 'Register'
+        return redirect('registerSuccess')
     
     context = {
         'page': page,

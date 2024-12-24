@@ -34,7 +34,11 @@
 
     {% include 'loader.html' %}
 
-    {% include 'header.html' %}
+    {% if page != 'index' %}
+
+        {% include 'header.html' %}
+
+    {% endif %}
 
     {% block content %}
 

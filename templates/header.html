@@ -1,10 +1,26 @@
 {% load static %}
 
+<style>
+  @media (max-width: 768px) {
+    .logo {
+      width: 230px; /* Adjust the width for smaller screens */
+      height: auto; /* Maintain aspect ratio */
+    }
+  }
+
+  @media (max-width: 576px) {
+    .logo {
+      width: 200px; /* Further adjustment for extra small screens */
+      height: auto;
+    }
+  }
+</style>
+
 <div class="container mt-4">
-        <div class="row text-center">
-            <div class="col mt-4 mb-3">
-                <img src="{% static 'ui-kit/logo.png' %}" alt="Logo" class="logo img-fluid">
-            </div>
-        </div>
-    <hr>
+  <div class="row text-center">
+    <div class="col mt-4 mb-3">
+      <img src="{% static 'ui-kit/logo.png' %}" alt="Logo" class="logo img-fluid">
+    </div>
+  </div>
+  <hr>
 </div>

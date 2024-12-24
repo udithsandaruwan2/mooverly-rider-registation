@@ -93,4 +93,7 @@ class ApplicationForm(ModelForm):
             {'class': "form-control custom-input", 'name': 'back_side_document'}
         )
         
+        self.fields['video'].widget.attrs.update(
+            {'class': "form-control custom-input", 'type': 'file', 'id': 'video-input', 'name': 'video', 'accept': 'video/webm', 'hidden': 'hidden'}
+        )
        

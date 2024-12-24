@@ -79,6 +79,12 @@ class Application(models.Model):
 
     front_side_document = models.ImageField(upload_to=upload_to_front, blank=True, null=True)
     back_side_document = models.ImageField(upload_to=upload_to_back, blank=True, null=True)
+    
+    def upload_to_video(instance, filename):
+        folder_name = instance.verification_document_number or instance.uuid
+        return os.path.join(f'documents/{folder_name}/videos/', filename)
+
+    video = models.FileField(upload_to=upload_to_video, blank=True, null=True)
 
     # Meta Fields
     created = models.DateTimeField(auto_now_add=True)

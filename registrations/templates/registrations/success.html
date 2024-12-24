@@ -4,6 +4,34 @@
 
 {% block content %}
 
-Success
+<style>
+    .success-icon {
+        font-size: 50px;
+        color: #ffc43f;
+        margin-bottom: 20px;
+    }
+    .success-message {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .order-info {
+        margin-bottom: 20px;
+        color: #555;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col text-center mt-4 mb-3">
+            <div class="success-icon">✔</div>
+            <div class="success-message">Thank You For Your Application</div>
+            <div class="order-info">
+                <strong>Ready To Examine Yourself.</strong><br>
+                We'll email you and call you to confirm the details.
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
